@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Countdown Timer</title>
+    <style>
+      body {
+        background-color: #283f4d;
+        font-family: "Open Sans", sans-serif;
+      }
+      #countdown {
+        font-size: 3em;
+        color: red;
+        text-align: center;
+        margin-top: 50px;
+        font-family: "Open Sans", sans-serif;
+        text-shadow: none;
+      }
+      #message, #birthday-message {
+        font-size: 1.5em;
+        color: #fff;
+        text-align: center;
+        margin-top: 100px;
+        font-family: "Open Sans", sans-serif;
+      }
+      #clock-img {
+        display: block;
+        margin: 0 auto;
+        width: 200px;
+        margin-top: 50px;
+      }
+      #background {
+        background-image: url("https://cdn.pixabay.com/photo/2016/03/09/09/22/chalkboard-1241005_1280.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="background"></div>
+    <div id="message">Looks like you came too early. Please visit again in:</div>
+    <div id="countdown"></div>
+    <img id="clock-img" src="https://cdn-icons-png.flaticon.com/512/58/58750.png" alt="Clock image">
+    <div id="birthday-message"></div>
+
+    <script>
+      // Set the date we're counting down to
+      var countDownDate = new Date("April 28, 2023 00:00:00").getTime();
+
+      // Update the count down every 1 second
+      var x = setInterval(function() {
+
+        // Get today's date and time
+        var now = new Date().getTime();
+        
+        // Find the distance between now and the count down date
+        var distance = countDownDate - now;
+        
+        // Time calculations for days, hours, minutes and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        // Display the result in the element with id="countdown"
+        document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
+        + minutes + "m " + seconds + "s ";
+        
+        // If the count down is finished, change the clock image to an iPhone image
+        if (distance < 0) {
+          clearInterval(x);
+          document.getElementById("countdown").remove();
+          document.getElementById("message").remove();
+          document.getElementById("clock-img").src = "https://cdn.pixabay.com/photo/2021/01/25/08/55/apple-iphone-12-pro-max-5947688_1280.png";
+		  var birthdayMessageEl = document.getElementById("birthday-message");
+          birthdayMessageEl.innerHTML = "Happy Birthday Nanoosi 🎉<br><br>Your gift is a new iPhone. Here are the details of the gift, just let me know what you want and I can order it.<br><br>1. iPhone 13/max: This is the best value iPhone right now, and it's basically the same internals as the 14. Best option if you want an iphone now.<br><br>2. iPhone 15: This is the new iPhone is expected to be released in September of this year. The biggest reason to wait would be the fact that they would likely switch to a usb-c port, and also have updated hardware.";
+        }
+      }, 1000);
+    </script>
+  </body>
+</html>
